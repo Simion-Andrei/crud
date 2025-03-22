@@ -8,7 +8,6 @@ void testeaza_plata_all() {
 	testeaza_modifica_zi();
 	testeaza_modifica_suma();
 	testeaza_modifica_tip();
-	testeaza_distruge_plata();
 }
 
 void testeaza_creeaza_plata() {
@@ -24,6 +23,9 @@ void testeaza_creeaza_plata() {
 	assert(p2->zi == 4);
 	assert(p2->suma >= 5.555f - eps && p2->suma <= 5.555f + eps);
 	assert(strcmp("altceva", p2->tip) == 0);
+
+	distruge_plata(p1);
+	distruge_plata(p2);
 }
 
 void testeaza_modifica_zi() {
@@ -35,6 +37,9 @@ void testeaza_modifica_zi() {
 
 	modifica_zi(p2, 4);
 	assert(p2->zi == 4);
+
+	distruge_plata(p1);
+	distruge_plata(p2);
 }
 
 void testeaza_modifica_suma() {
@@ -48,6 +53,9 @@ void testeaza_modifica_suma() {
 
 	modifica_suma(p2, 15.434f);
 	assert(p2->suma >= 15.434f - eps && p2->suma <= 15.434f + eps);
+
+	distruge_plata(p1);
+	distruge_plata(p2);
 }
 
 void testeaza_modifica_tip() {
@@ -59,11 +67,6 @@ void testeaza_modifica_tip() {
 
 	modifica_tip(p2, "testdrivendevelopment");
 	assert(strcmp(p2->tip, "testdrivendevelopment") == 0);
-}
-
-void testeaza_distruge_plata() {
-	Plata* p1 = creeaza_plata(1, 2.34f, "ceva");
-	Plata* p2 = creeaza_plata(4, 5.555f, "altceva");
 
 	distruge_plata(p1);
 	distruge_plata(p2);

@@ -8,7 +8,7 @@
 * Args:
 *	p (Plati*) - Vectorul de plati
 */
-void run(Plati* p);
+void run(Service* service);
 
 /*
 * Functie care citeste de la utilizator o zi (int), o suma (float) si un tip (char) si creeaza un obiect de tip Plata cu acestea
@@ -16,7 +16,7 @@ void run(Plati* p);
 * Args:
 *	p (Plati*) - Vectorul de plati
 */
-void ui_adauga_plata(Plati* p);
+void ui_adauga_plata(Service* service);
 
 /*
 * Functie care afiseaza platile ordonate, dupa suma acestora
@@ -25,7 +25,7 @@ void ui_adauga_plata(Plati* p);
 *	p (Plati*) - Vectorul de plati
 *	ord (int) - Daca valoarea acestui parametru este 1, platile vor fi ordonate crescator, altfel vor fi ordonate descrescator
 */
-void ui_plati_ordonat_suma(Plati* p, int ord);
+void ui_plati_ordonat_suma(Service* service, int ord);
 
 /*
 * Functie care afiseaza platile ordonate, dupa tipul acestora
@@ -34,7 +34,7 @@ void ui_plati_ordonat_suma(Plati* p, int ord);
 *	p (Plati*) - Vectorul de plati
 *	ord (int) - Daca valoarea acestui parametru este 1, platile vor fi ordonate crescator, altfel vor fi ordonate descrescator
 */
-void ui_plati_ordonat_tip(Plati* p, int ord);
+void ui_plati_ordonat_tip(Service* service, int ord);
 
 /*
 * Functie care afiseaza platile care au suma mai mare decat un numar citit de la utilizator
@@ -42,7 +42,7 @@ void ui_plati_ordonat_tip(Plati* p, int ord);
 * Args:
 *	p (Plati*) - Vectorul de plati
 */
-void ui_plati_filtrat_suma(Plati* p);
+void ui_plati_filtrat_suma(Service* service);
 
 /*
 * Functie care afiseaza utilizatorului toate elementele curente, indexate
@@ -52,7 +52,7 @@ void ui_plati_filtrat_suma(Plati* p);
 * Args:
 *	p (Plati*) - Vectorul de plati
 */
-void ui_modifica_zi(Plati* p);
+void ui_modifica_zi(Service* service);
 
 /*
 * Functie care afiseaza utilizatorului toate elementele curente, indexate
@@ -62,7 +62,7 @@ void ui_modifica_zi(Plati* p);
 * Args:
 *	p (Plati*) - Vectorul de plati
 */
-void ui_modifica_suma(Plati* p);
+void ui_modifica_suma(Service* service);
 
 /*
 * Functie care afiseaza utilizatorului toate elementele curente, indexate
@@ -72,7 +72,7 @@ void ui_modifica_suma(Plati* p);
 * Args:
 *	p (Plati*) - Vectorul de plati
 */
-void ui_modifica_tip(Plati* p);
+void ui_modifica_tip(Service* service);
 
 /*
 * Functie care afiseaza utilizatorului toate elementele curente, indexate
@@ -82,4 +82,4 @@ void ui_modifica_tip(Plati* p);
 * Args:
 *	p (Plati*) - Vectorul de plati
 */
-void ui_sterge_plata(Plati* p);
+void ui_sterge_plata(Service* service);

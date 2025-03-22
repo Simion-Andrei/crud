@@ -6,68 +6,43 @@ Plati* creeaza_repo() {
 
 	if (p == NULL) return NULL;
 
-	p->dimensiune = 0;
-	p->capacitate = 5;
+	p->v = creeaza_vector();
 
-	p->content = (Plata**)malloc(sizeof(Plata*) * p->capacitate);
+	if (p->v == NULL) {
+		free(p);
+		return NULL;
+	}
 
 	return p;
 }
 
-static void redimensioneaza_repo(Plati* p, int capacitateNoua) {
-	if (p == NULL) return;
-
-	Plata** temp = (Plata**)malloc(sizeof(Plata*) * capacitateNoua);
-
-	if (temp == NULL) return;
-
-	// Copiem valorile din vectorul vechi in cel nou
-	for (int i = 0; i < p->dimensiune; ++i) {
-		temp[i] = p->content[i];
-	}
-
-	free(p->content); // Eliberam blocul de memorie alocat vectorului precedent
-	p->content = temp;
-	p->capacitate = capacitateNoua;
-}
-
 void adauga_plata(Plati* plati, Plata* plata) {
-	if (plati == NULL || plata == NULL) return;
+	if (plati == NULL || plata == NULL || plati->v == NULL) return;
 
-	if (plati->dimensiune == plati->capacitate) redimensioneaza_repo(plati, plati->capacitate * 2);
-
-	plati->content[plati->dimensiune] = plata;
-	plati->dimensiune++;
+	add(plati->v, plata);
 }
 
-void sterge_plata(Plati* plati, Plata* plata) {
-	if (plati == NULL || plata == NULL) return;
+int sterge_plata(Plati* plati, Plata* plata) {
+	if (plati == NULL || plata == NULL || plati->v == NULL) return 0;
 
-	if (plati->dimensiune == 0) return;
-
-	short int gasit = 0;
-	for (int i = 0; i < plati->dimensiune; ++i) {
-		if (plati->content[i] == plata) {
-			gasit = 1;
-			Plata* deSters = plati->content[i];
-			distruge_plata(deSters);
-		}
-
-		if (gasit && i < plati->dimensiune - 1) {
-			plati->content[i] = plati->content[i + 1];
+	for (int i = 0; i < plati->v->size; ++i) {
+		if (plata == (Plata*)plati->v->vector[i]) {
+			del(plati->v, i);
+			distruge_plata(plata);
+			return 1;
 		}
 	}
 
-	plati->dimensiune--;
+	return 0;
 }
 
 void sterge_repo(Plati* plati) {
-	if (plati == NULL || plati->content == NULL) return;
+	if (plati == NULL || plati->v == NULL) return;
 
-	for (int i = 0; i < plati->dimensiune; ++i) {
-		distruge_plata(plati->content[i]);
+	for (int i = 0; i < plati->v->size; ++i) {
+		distruge_plata(plati->v->vector[i]);
 	}
 
-	free(plati->content);
+	distruge(plati->v);
 	free(plati);
 }

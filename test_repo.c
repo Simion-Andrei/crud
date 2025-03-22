@@ -13,9 +13,10 @@ void testeaza_repo_all() {
 void testeaza_creeaza_repo() {
 	Plati* p = creeaza_repo();
 
-	assert(p->capacitate == 5);
-	assert(p->dimensiune == 0);
-	assert(p->content != NULL);
+	assert(p->v != NULL);
+	assert(p->v->size == 0);
+	assert(p->v->capacitate == 10);
+	assert(p->v->vector != NULL);
 
 	sterge_repo(p);
 }
@@ -26,19 +27,19 @@ void testeaza_adauga_plata() {
 
 	adauga_plata(plati, plata1);
 	
-	assert(plati->dimensiune == 1);
-	assert(plati->content[0] == plata1);
+	assert(plati->v->size == 1);
+	assert(plati->v->vector[0] == plata1);
 
 	adauga_plata(plati, NULL);
 
-	assert(plati->dimensiune == 1);
+	assert(plati->v->size == 1);
 
 	Plata* plata2 = creeaza_plata(7, 53.3f, "Random");
 
 	adauga_plata(plati, plata2);
 
-	assert(plati->dimensiune == 2);
-	assert(plati->content[1] == plata2);
+	assert(plati->v->size == 2);
+	assert(plati->v->vector[1] == plata2);
 
 	Plata* plata3 = creeaza_plata(7, 53.3f, "Random");
 	Plata* plata4 = creeaza_plata(7, 53.3f, "Random");
@@ -49,8 +50,8 @@ void testeaza_adauga_plata() {
 	adauga_plata(plati, plata5);
 	adauga_plata(plati, plata6);
 
-	assert(plati->dimensiune == 6);
-	assert(plati->capacitate == 10);
+	assert(plati->v->size == 6);
+	assert(plati->v->capacitate == 10);
 
 	sterge_repo(plati);
 }
@@ -61,19 +62,19 @@ void testeaza_sterge_plata() {
 	Plata* plata2 = creeaza_plata(7, 53.3f, "Random");
 
 	sterge_plata(plati, NULL);
-	assert(plati->dimensiune == 0);
+	assert(plati->v->size == 0);
 	sterge_plata(plati, plata1);
-	assert(plati->dimensiune == 0);
+	assert(plati->v->size == 0);
 
 	adauga_plata(plati, plata1);
 	adauga_plata(plati, plata2);
 
-	assert(plati->dimensiune == 2);
+	assert(plati->v->size == 2);
 
 	sterge_plata(plati, plata1);
 
-	assert(plati->dimensiune == 1);
-	assert(plati->content[0] == plata2);
+	assert(plati->v->size == 1);
+	assert(plati->v->vector[1] == plata2);
 
 	sterge_repo(plati);
 }

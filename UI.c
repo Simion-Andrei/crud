@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void run(Plati* p) {
+void run(Service* service) {
 	while (1) {
 		char s[20];
 
@@ -15,63 +15,63 @@ void run(Plati* p) {
 		}
 		else {
 			s[19] = '\0';
-			if (strcmp(s, "adauga_plata") == 0) ui_adauga_plata(p);
-			else if (strcmp(s, "modifica_zi") == 0) ui_modifica_zi(p);
-			else if (strcmp(s, "modifica_suma") == 0) ui_modifica_suma(p);
-			else if (strcmp(s, "modifica_tip") == 0) ui_modifica_tip(p);
-			else if (strcmp(s, "sterge_plata") == 0) ui_sterge_plata(p);
-			else if (strcmp(s, "ordonat_crescator_suma") == 0) ui_plati_ordonat_suma(p, 1);
-			else if (strcmp(s, "ordonat_descrescator_suma") == 0) ui_plati_ordonat_suma(p, 0);
-			else if (strcmp(s, "ordonat_crescator_tip") == 0) ui_plati_ordonat_tip(p, 1);
-			else if (strcmp(s, "ordonat_descrescator_tip") == 0) ui_plati_ordonat_tip(p, 0);
-			else if (strcmp(s, "filtrat_suma") == 0) ui_plati_filtrat_suma(p);
+			if (strcmp(s, "adauga_plata") == 0) ui_adauga_plata(service);
+			else if (strcmp(s, "modifica_zi") == 0) ui_modifica_zi(service);
+			else if (strcmp(s, "modifica_suma") == 0) ui_modifica_suma(service);
+			else if (strcmp(s, "modifica_tip") == 0) ui_modifica_tip(service);
+			else if (strcmp(s, "sterge_plata") == 0) ui_sterge_plata(service);
+			else if (strcmp(s, "ordonat_crescator_suma") == 0) ui_plati_ordonat_suma(service, 1);
+			else if (strcmp(s, "ordonat_descrescator_suma") == 0) ui_plati_ordonat_suma(service, 0);
+			else if (strcmp(s, "ordonat_crescator_tip") == 0) ui_plati_ordonat_tip(service, 1);
+			else if (strcmp(s, "ordonat_descrescator_tip") == 0) ui_plati_ordonat_tip(service, 0);
+			else if (strcmp(s, "filtrat_suma") == 0) ui_plati_filtrat_suma(service);
 			else if (strcmp(s, "end") == 0) return;
 			else printf("\n");
 		}
 	}
 }
 
-void ui_plati_ordonat_suma(Plati* p, int ord) {
-	if (p->dimensiune == 0) {
+void ui_plati_ordonat_suma(Service* service, int ord) {
+	if (service->repo->v->size == 0) {
 		printf("Lista de plati este momental goala!\n");
 		return;
 	}
 
-	Plata** ordonat = serv_plati_ordonat_suma(p, ord);
+	Plata** ordonat = serv_plati_ordonat_suma(service, ord);
 
 	if (ordonat == NULL) {
 		printf("Nu s-a putut efectua ordonarea!\n");
 		return;
 	}
 
-	for (int i = 0; i < p->dimensiune; ++i) {
+	for (int i = 0; i < service->repo->v->size; ++i) {
 		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, ordonat[i]->tip, ordonat[i]->suma, ordonat[i]->zi);
 	}
 
 	free(ordonat);
 }
 
-void ui_plati_ordonat_tip(Plati* p, int ord) {
-	if (p->dimensiune == 0) {
+void ui_plati_ordonat_tip(Service* service, int ord) {
+	if (service->repo->v->size == 0) {
 		printf("Lista de plati este momental goala!\n");
 		return;
 	}
 
-	Plata** ordonat = serv_plati_ordonat_tip(p, ord);
+	Plata** ordonat = serv_plati_ordonat_tip(service, ord);
 
 	if (ordonat == NULL) {
 		printf("Nu s-a putut efectua ordonarea!\n");
 		return;
 	}
 
-	for (int i = 0; i < p->dimensiune; ++i) {
+	for (int i = 0; i < service->repo->v->size; ++i) {
 		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, ordonat[i]->tip, ordonat[i]->suma, ordonat[i]->zi);
 	}
 
 	free(ordonat);
 }
 
-void ui_plati_filtrat_suma(Plati* p) {
+void ui_plati_filtrat_suma(Service* service) {
 	float suma;
 	printf("Suma cu care se va face filtrarea: ");
 	if (scanf("%f", &suma) == 0) {
@@ -79,21 +79,21 @@ void ui_plati_filtrat_suma(Plati* p) {
 		return;
 	}
 
-	Plata** filtrat = serv_plati_filtrat_suma(p, suma);
+	Plata** filtrat = serv_plati_filtrat_suma(service, suma);
 
 	if (filtrat == NULL) {
 		printf("Nu s-a putut efectua filtrarea!\n");
 		return;
 	}
 
-	for (int i = 0; i < p->dimensiune && filtrat[i] != NULL; ++i) {
+	for (int i = 0; i < service->repo->v->size && filtrat[i] != NULL; ++i) {
 		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, filtrat[i]->tip, filtrat[i]->suma, filtrat[i]->zi);
 	}
 
 	free(filtrat);
 }
 
-void ui_adauga_plata(Plati* p) {
+void ui_adauga_plata(Service* service) {
 	int zi;
 	float suma;
 	char tip[25];
@@ -117,17 +117,18 @@ void ui_adauga_plata(Plati* p) {
 	}
 	
 	tip[24] = '\0';
-	serv_adauga_plata(p, zi, suma, tip);
+	serv_adauga_plata(service, zi, suma, tip);
 }
 
-void ui_modifica_zi(Plati* p) {
-	if (p->dimensiune == 0) {
+void ui_modifica_zi(Service* service) {
+	if (service->repo->v->size == 0) {
 		printf("Lista de plati este goala, nu poti modifica nimic!\n");
 		return;
 	}
 
-	for (int i = 0; i < p->dimensiune; ++i) {
-		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, p->content[i]->tip, p->content[i]->suma, p->content[i]->zi);
+	for (int i = 0; i < service->repo->v->size; ++i) {
+		Plata* p = (Plata*)service->repo->v->vector[i];
+		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, p->tip, p->suma, p->zi);
 	}
 
 	printf("Introdu indexul platii pe care vrei sa o modifici sau 0 daca vrei sa renunti: ");
@@ -140,7 +141,7 @@ void ui_modifica_zi(Plati* p) {
 
 	if (idx == 0) return;
 
-	if (idx < 0 || idx > p->dimensiune) {
+	if (idx < 0 || idx > service->repo->v->size) {
 		printf("PARAMETRU INVALID\n");
 		return;
 	}
@@ -153,17 +154,23 @@ void ui_modifica_zi(Plati* p) {
 		return;
 	}
 
-	serv_modifica_zi(p->content[idx-1], zi);
+	int rasp = serv_modifica_zi(service, (Plata*)service->repo->v->vector[idx-1], zi);
+
+	if (rasp == 1) {
+		printf("Ziua a fost modificata cu succes!\n");
+	}
+	else printf("Parametru invalid!");
 }
 
-void ui_modifica_suma(Plati* p) {
-	if (p->dimensiune == 0) {
+void ui_modifica_suma(Service* service) {
+	if (service->repo->v->size == 0) {
 		printf("Lista de plati este goala, nu poti modifica nimic!\n");
 		return;
 	}
 
-	for (int i = 0; i < p->dimensiune; ++i) {
-		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, p->content[i]->tip, p->content[i]->suma, p->content[i]->zi);
+	for (int i = 0; i < service->repo->v->size; ++i) {
+		Plata* p = (Plata*)service->repo->v->vector[i];
+		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, p->tip, p->suma, p->zi);
 	}
 
 	printf("Introdu indexul platii pe care vrei sa o modifici sau 0 daca vrei sa renunti: ");
@@ -176,7 +183,7 @@ void ui_modifica_suma(Plati* p) {
 
 	if (idx == 0) return;
 
-	if (idx < 0 || idx > p->dimensiune) {
+	if (idx < 0 || idx > service->repo->v->size) {
 		printf("PARAMETRU INVALID\n");
 		return;
 	}
@@ -189,17 +196,23 @@ void ui_modifica_suma(Plati* p) {
 		return;
 	}
 
-	serv_modifica_suma(p->content[idx - 1], suma);
+	int rasp = serv_modifica_suma(service, (Plata*)service->repo->v->vector[idx - 1], suma);
+
+	if (rasp == 1) {
+		printf("Syna a fost modificata cu succes!\n");
+	}
+	else printf("Parametru invalid!");
 }
 
-void ui_modifica_tip(Plati* p) {
-	if (p->dimensiune == 0) {
+void ui_modifica_tip(Service* service) {
+	if (service->repo->v->size == 0) {
 		printf("Lista de plati este goala, nu poti modifica nimic!\n");
 		return;
 	}
 
-	for (int i = 0; i < p->dimensiune; ++i) {
-		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, p->content[i]->tip, p->content[i]->suma, p->content[i]->zi);
+	for (int i = 0; i < service->repo->v->size; ++i) {
+		Plata* p = (Plata*)service->repo->v->vector[i];
+		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, p->tip, p->suma, p->zi);
 	}
 
 	printf("Introdu indexul platii pe care vrei sa o modifici sau 0 daca vrei sa renunti: ");
@@ -212,7 +225,7 @@ void ui_modifica_tip(Plati* p) {
 
 	if (idx == 0) return;
 
-	if (idx < 0 || idx > p->dimensiune) {
+	if (idx < 0 || idx > service->repo->v->size) {
 		printf("PARAMETRU INVALID\n");
 		return;
 	}
@@ -225,17 +238,23 @@ void ui_modifica_tip(Plati* p) {
 		return;
 	}
 
-	serv_modifica_tip(p->content[idx - 1], tip);
+	int rasp = serv_modifica_tip(service, (Plata*)service->repo->v->vector[idx - 1], tip);
+
+	if (rasp == 1) {
+		printf("Syna a fost modificata cu succes!\n");
+	}
+	else printf("Parametru invalid!");
 }
 
-void ui_sterge_plata(Plati* p) {
-	if (p->dimensiune == 0) {
+void ui_sterge_plata(Service* service) {
+	if (service->repo->v->size == 0) {
 		printf("Lista de plati este goala, nu poti sterge nimic!\n");
 		return;
 	}
 
-	for (int i = 0; i < p->dimensiune; ++i) {
-		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, p->content[i]->tip, p->content[i]->suma, p->content[i]->zi);
+	for (int i = 0; i < service->repo->v->size; ++i) {
+		Plata* p = (Plata*)service->repo->v->vector[i];
+		printf("%d.TIP: %s SUMA: %f ZIUA: %d\n", i + 1, p->tip, p->suma, p->zi);
 	}
 
 	printf("Introdu indexul platii pe care vrei sa o stergi sau 0 daca vrei sa renunti: ");
@@ -248,10 +267,13 @@ void ui_sterge_plata(Plati* p) {
 
 	if (idx == 0) return;
 
-	if (idx < 0 || idx > p->dimensiune) {
+	if (idx < 0 || idx > service->repo->v->size) {
 		printf("PARAMETRU INVALID\n");
 		return;
 	}
 
-	sterge_plata(p, p->content[idx - 1]);
+	int rasp = serv_sterge_plata(service, (Plata*)service->repo->v->vector[idx-1]);
+
+	if (rasp == 1) printf("Plata a fost stearsa cu succes!\n");
+	else printf("Nu s-a gasit plata cautata!\n");
 }

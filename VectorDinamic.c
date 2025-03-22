@@ -20,6 +20,34 @@ Vector* creeaza_vector() {
 	return ref;
 }
 
+/*
+* Functie care aloca un nou bloc de memorie vectorului v, avand
+* capacitate dubla de stocare
+*
+* Args:
+*	v (Vector*) - Vectorul dinamic
+*/
+static void redimensioneaza(Vector* v) {
+	if (v == NULL) return;
+
+	TElem* ref = v->vector;
+
+	v->capacitate *= 2;
+	v->vector = (TElem*)malloc(sizeof(TElem) * v->capacitate);
+
+	if (v->vector == NULL) {
+		v->capacitate /= 2;
+		v->vector = ref;
+		return;
+	}
+
+	for (int i = 0; i < v->size; ++i) {
+		v->vector[i] = ref[i];
+	}
+
+	free(ref);
+}
+
 void add(Vector* v, TElem elem) {
 	if (v == NULL) return;
 
@@ -35,21 +63,13 @@ int del(Vector* v, int idx) {
 	for (int i = idx; i < v->size; ++i) {
 		v->vector[i] = v->vector[i + 1];
 	}
+
+	return 1;
 }
 
-void redimensioneaza(Vector* v) {
+void distruge(Vector* v) {
 	if (v == NULL) return;
 
-	TElem* ref = v->vector;
-
-	v->capacitate *= 2;
-	v->vector = (TElem*)malloc(sizeof(TElem) * v->capacitate);
-
-	if (v->vector == NULL) {
-		v->capacitate /= 2;
-		v->vector = ref;
-		return;
-	}
-
-	memcpy(v->vector, ref, sizeof(TElem) * v->size);
+	if (v->vector != NULL) free(v->vector);
+	free(v);
 }

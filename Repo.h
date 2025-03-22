@@ -1,10 +1,9 @@
 #pragma once
 #include "Plata.h"
+#include "VectorDinamic.h"
 
 typedef struct{
-	Plata** content;
-	int dimensiune;
-	int capacitate;
+	Vector* v;
 } Plati;
 
 /*
@@ -35,8 +34,12 @@ void adauga_plata(Plati* plati, Plata* plata);
 * Args:
 *	plati (Plati*) - Vectorul dinamic de plati
 *	plata (Plata*) - Plata ce va fi stearsa din vectorul de plati
+* 
+* Returns:
+*	1 - Daca elementul a fost gasit si sters
+*	0 - Daca elementul nu a fost gasit
 */
-void sterge_plata(Plati* plati, Plata* plata);
+int sterge_plata(Plati* plati, Plata* plata);
 
 /*
 * Functie care elibereaza blocul de memoriei alocat obiectului referit de 'plati'

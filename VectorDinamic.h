@@ -9,7 +9,7 @@ typedef struct {
 } Vector;
 
 /*
-* Functie care creeaza un vector dinamic
+* Functie care creeaza un vector dinamic cu capacitatea initiala 10
 * 
 * Returns:
 *	Adresa vectorului - daca a fost creat cu succes
@@ -40,10 +40,9 @@ void add(Vector* v, TElem elem);
 int del(Vector* v, int idx);
 
 /*
-* Functie care aloca un nou bloc de memorie vectorului v, avand
-* capacitate dubla de stocare
+* Functie care dealoca memoria alocata vectorului v
 * 
 * Args:
 *	v (Vector*) - Vectorul dinamic
 */
-void redimensioneaza(Vector* v);
+void distruge(Vector* v);

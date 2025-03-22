@@ -9,5 +9,3 @@ void testeaza_modifica_zi();
 void testeaza_modifica_suma();
 
 void testeaza_modifica_tip();
-
-void testeaza_distruge_plata();
