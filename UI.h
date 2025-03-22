@@ -1,0 +1,85 @@
+#pragma once
+#include "Service.h"
+
+/*
+* Functia care contine loop-ul principal al programului
+* Citeste date de la utilizator si apeleaza functiile corespunzatoare acestora
+*
+* Args:
+*	p (Plati*) - Vectorul de plati
+*/
+void run(Plati* p);
+
+/*
+* Functie care citeste de la utilizator o zi (int), o suma (float) si un tip (char) si creeaza un obiect de tip Plata cu acestea
+*
+* Args:
+*	p (Plati*) - Vectorul de plati
+*/
+void ui_adauga_plata(Plati* p);
+
+/*
+* Functie care afiseaza platile ordonate, dupa suma acestora
+*
+* Args:
+*	p (Plati*) - Vectorul de plati
+*	ord (int) - Daca valoarea acestui parametru este 1, platile vor fi ordonate crescator, altfel vor fi ordonate descrescator
+*/
+void ui_plati_ordonat_suma(Plati* p, int ord);
+
+/*
+* Functie care afiseaza platile ordonate, dupa tipul acestora
+*
+* Args:
+*	p (Plati*) - Vectorul de plati
+*	ord (int) - Daca valoarea acestui parametru este 1, platile vor fi ordonate crescator, altfel vor fi ordonate descrescator
+*/
+void ui_plati_ordonat_tip(Plati* p, int ord);
+
+/*
+* Functie care afiseaza platile care au suma mai mare decat un numar citit de la utilizator
+* 
+* Args:
+*	p (Plati*) - Vectorul de plati
+*/
+void ui_plati_filtrat_suma(Plati* p);
+
+/*
+* Functie care afiseaza utilizatorului toate elementele curente, indexate
+* Solicita acestuia sa introduca un index si o zi, pentru a schimba ziua platii cu indexul ales in cea introdusa
+* Daca dimensiunea vectorului este 0, functia afiseaza un mesaj utilizatorului
+*
+* Args:
+*	p (Plati*) - Vectorul de plati
+*/
+void ui_modifica_zi(Plati* p);
+
+/*
+* Functie care afiseaza utilizatorului toate elementele curente, indexate
+* Solicita acestuia sa introduca un index si o suma, pentru a schimba suma platii cu indexul ales in cea introdusa
+* Daca dimensiunea vectorului este 0, functia afiseaza un mesaj utilizatorului
+*
+* Args:
+*	p (Plati*) - Vectorul de plati
+*/
+void ui_modifica_suma(Plati* p);
+
+/*
+* Functie care afiseaza utilizatorului toate elementele curente, indexate
+* Solicita acestuia sa introduca un index si un tip, pentru a schimba tipul platii cu indexul ales in cel introdus
+* Daca dimensiunea vectorului este 0, functia afiseaza un mesaj utilizatorului
+*
+* Args:
+*	p (Plati*) - Vectorul de plati
+*/
+void ui_modifica_tip(Plati* p);
+
+/*
+* Functie care afiseaza utilizatorului toate elementele curente, indexate
+* Solicita acestuia sa introduca un index pentru a sterge elementul respectiv
+* Daca dimensiunea vectorului este 0, functia afiseaza un mesaj utilizatorului
+*
+* Args:
+*	p (Plati*) - Vectorul de plati
+*/
+void ui_sterge_plata(Plati* p);

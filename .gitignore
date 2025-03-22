@@ -1,0 +1,9 @@
+*.user
+*.filters
+*.sln
+*.vcxproj
+*.log
+LastCoverageResults.log
+x64
+OOP_LAB2-4
+.opencppcov
