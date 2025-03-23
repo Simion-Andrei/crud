@@ -16,20 +16,17 @@ typedef struct{
 Plati* creeaza_repo();
 
 /*
-* Functie care adauga obiectul plata la vectorul de plati
-* Daca capacitatea vectorului curent este depasita, dimensiunea acestuia va fi realocata apeland functia redimensioneaza_repo
+* Functie care adauga obiectul plata in repo-ul de plati
 *
 * Args:
-*	plati (Plati*) - Vectorul dinamic de plati
+*	plati (Plati*) - Repo-ul de plati
 *	plata (Plata*) - Plata ce va fi adaugata la vectorul de plati
 */
 void adauga_plata(Plati* plati, Plata* plata);
 
 /*
-* Functie care sterge obiectul plata din vectorul de plati
+* Functie care sterge obiectul plata din repo-ul de plati
 * Blocul de memorie ocupat de element va fi dealocat
-* Elementele vor fi rearanjate dupa stergerea obiectului
-* Dimensiunea vectorului va fi redusa cu 1
 *
 * Args:
 *	plati (Plati*) - Vectorul dinamic de plati
@@ -42,8 +39,7 @@ void adauga_plata(Plati* plati, Plata* plata);
 int sterge_plata(Plati* plati, Plata* plata);
 
 /*
-* Functie care elibereaza blocul de memoriei alocat obiectului referit de 'plati'
-* Dupa efectuarea functiei, pointerul va deveni nul
+* Functie care elibereaza blocul de memoriei alocat repo-ului
 *
 * Args:
 *	plati (Plati*) - Repoul de plati

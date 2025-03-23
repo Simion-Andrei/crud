@@ -36,6 +36,12 @@ void testeaza_add() {
 
 	assert(strcmp((char*)v->vector[1], t) == 0);
 
+	for (int i = 0; i < 10; ++i) {
+		add(v, ptr);
+	}
+
+	assert(v->capacitate == 20);
+
 	distruge(v);
 }
 

@@ -13,18 +13,21 @@ Service* creeaza_service(Plati* rep) {
 	return serv;
 }
 
-void serv_adauga_plata(Service* service, int zi, float suma, char* tip) {
+int serv_adauga_plata(Service* service, int zi, float suma, char* tip) {
 	Plata* plataNoua = creeaza_plata(zi, suma, tip);
 
-	if (plataNoua == NULL) return;
+	if (plataNoua == NULL) return 0;
 	if (service == NULL || service->repo == NULL) {
 		distruge_plata(plataNoua);
-		return;
+		return 0;
 	}
 
-	if (valideaza_plata(plataNoua) == 1) adauga_plata(service->repo, plataNoua);
-	else {
+	if (valideaza_plata(plataNoua) == 1) {
+		adauga_plata(service->repo, plataNoua);
+		return 1;
+	} else {
 		distruge_plata(plataNoua);
+		return 0;
 	}
 }
 

@@ -117,7 +117,10 @@ void ui_adauga_plata(Service* service) {
 	}
 	
 	tip[24] = '\0';
-	serv_adauga_plata(service, zi, suma, tip);
+	int rasp = serv_adauga_plata(service, zi, suma, tip);
+
+	if (rasp == 1) printf("Plata a fost creeata cu succes!\n");
+	else printf("Date invalide!\n");
 }
 
 void ui_modifica_zi(Service* service) {
@@ -199,7 +202,7 @@ void ui_modifica_suma(Service* service) {
 	int rasp = serv_modifica_suma(service, (Plata*)service->repo->v->vector[idx - 1], suma);
 
 	if (rasp == 1) {
-		printf("Syna a fost modificata cu succes!\n");
+		printf("Suma a fost modificata cu succes!\n");
 	}
 	else printf("Parametru invalid!");
 }
@@ -241,7 +244,7 @@ void ui_modifica_tip(Service* service) {
 	int rasp = serv_modifica_tip(service, (Plata*)service->repo->v->vector[idx - 1], tip);
 
 	if (rasp == 1) {
-		printf("Syna a fost modificata cu succes!\n");
+		printf("Tipul a fost modificat cu succes!\n");
 	}
 	else printf("Parametru invalid!");
 }

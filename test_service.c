@@ -111,6 +111,9 @@ void testeaza_serv_adauga_plata() {
 	serv_adauga_plata(service, 2, suma2, "");
 	assert(repo->v->size == 1);
 
+	serv_adauga_plata(NULL, 1, 2.0f, "No");
+	assert(repo->v->size == 1);
+
 	distruge_service(service);
 }
 

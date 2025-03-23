@@ -11,6 +11,7 @@ Plati* creeaza_repo() {
 	if (p->v == NULL) {
 		free(p);
 		return NULL;
+		// Aici nu o sa intre testele pentru ca ar trebui ca malloc-ul sa returneze null
 	}
 
 	return p;

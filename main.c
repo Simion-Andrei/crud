@@ -19,7 +19,8 @@ int main()
 	testeaza_valideaza_plata();
 	testeaza_service_all();
 	Plati* p = creeaza_repo();
-	//run(p);
-	sterge_repo(p);
+	Service* serv = creeaza_service(p);
+	//run(serv);
+	distruge_service(serv);
 	_CrtDumpMemoryLeaks();
 }

@@ -15,6 +15,7 @@ Vector* creeaza_vector() {
 	if (ref->vector == NULL) {
 		free(ref);
 		return NULL;
+		// Aici nu o sa intre testele pentru ca ar trebui ca malloc-ul sa returneze null
 	}
 
 	return ref;
@@ -39,6 +40,7 @@ static void redimensioneaza(Vector* v) {
 		v->capacitate /= 2;
 		v->vector = ref;
 		return;
+		// Aici nu o sa intre testele pentru ca ar trebui ca malloc-ul sa returneze null
 	}
 
 	for (int i = 0; i < v->size; ++i) {

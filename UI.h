@@ -6,7 +6,7 @@
 * Citeste date de la utilizator si apeleaza functiile corespunzatoare acestora
 *
 * Args:
-*	p (Plati*) - Vectorul de plati
+*	service (Service*) - Service-ul de plati
 */
 void run(Service* service);
 
@@ -14,7 +14,7 @@ void run(Service* service);
 * Functie care citeste de la utilizator o zi (int), o suma (float) si un tip (char) si creeaza un obiect de tip Plata cu acestea
 *
 * Args:
-*	p (Plati*) - Vectorul de plati
+*	service (Service*) - Service-ul de plati
 */
 void ui_adauga_plata(Service* service);
 
@@ -22,7 +22,7 @@ void ui_adauga_plata(Service* service);
 * Functie care afiseaza platile ordonate, dupa suma acestora
 *
 * Args:
-*	p (Plati*) - Vectorul de plati
+*	service (Service*) - Service-ul de plati
 *	ord (int) - Daca valoarea acestui parametru este 1, platile vor fi ordonate crescator, altfel vor fi ordonate descrescator
 */
 void ui_plati_ordonat_suma(Service* service, int ord);
@@ -31,7 +31,7 @@ void ui_plati_ordonat_suma(Service* service, int ord);
 * Functie care afiseaza platile ordonate, dupa tipul acestora
 *
 * Args:
-*	p (Plati*) - Vectorul de plati
+*	service (Service*) - Service-ul de plati
 *	ord (int) - Daca valoarea acestui parametru este 1, platile vor fi ordonate crescator, altfel vor fi ordonate descrescator
 */
 void ui_plati_ordonat_tip(Service* service, int ord);
@@ -40,7 +40,7 @@ void ui_plati_ordonat_tip(Service* service, int ord);
 * Functie care afiseaza platile care au suma mai mare decat un numar citit de la utilizator
 * 
 * Args:
-*	p (Plati*) - Vectorul de plati
+*	service (Service*) - Service-ul de plati
 */
 void ui_plati_filtrat_suma(Service* service);
 
@@ -50,7 +50,7 @@ void ui_plati_filtrat_suma(Service* service);
 * Daca dimensiunea vectorului este 0, functia afiseaza un mesaj utilizatorului
 *
 * Args:
-*	p (Plati*) - Vectorul de plati
+*	service (Service*) - Service-ul de plati
 */
 void ui_modifica_zi(Service* service);
 
@@ -60,7 +60,7 @@ void ui_modifica_zi(Service* service);
 * Daca dimensiunea vectorului este 0, functia afiseaza un mesaj utilizatorului
 *
 * Args:
-*	p (Plati*) - Vectorul de plati
+*	service (Service*) - Service-ul de plati
 */
 void ui_modifica_suma(Service* service);
 
@@ -70,7 +70,7 @@ void ui_modifica_suma(Service* service);
 * Daca dimensiunea vectorului este 0, functia afiseaza un mesaj utilizatorului
 *
 * Args:
-*	p (Plati*) - Vectorul de plati
+*	service (Service*) - Service-ul de plati
 */
 void ui_modifica_tip(Service* service);
 
@@ -80,6 +80,6 @@ void ui_modifica_tip(Service* service);
 * Daca dimensiunea vectorului este 0, functia afiseaza un mesaj utilizatorului
 *
 * Args:
-*	p (Plati*) - Vectorul de plati
+*	service (Service*) - Service-ul de plati
 */
 void ui_sterge_plata(Service* service);
